@@ -2,10 +2,7 @@ package definitons;
 
 import net.serenitybdd.jbehave.SerenityStory;
 import org.apache.commons.lang3.StringUtils;
-import org.jbehave.core.annotations.AfterStory;
-import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
+import org.jbehave.core.annotations.*;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -61,5 +58,4 @@ public class FirstTest extends SerenityStory {
     public void end() {
         driver.quit();
     }
-
 }
