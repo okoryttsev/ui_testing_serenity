@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 /**
  * @author Sasha on 3/21/2017.
  */
-public class Constants {
-    private static final Logger LOGGER = Logger.getLogger( Constants.class.getName() );
+public class ConstantsWave {
+    private static final Logger LOGGER = Logger.getLogger( ConstantsWave.class.getName() );
 
     public static final String WAVE_RUN = "var waveExtensionPath = " +
             "'chrome-extension://jbbplnpkjmmeebjpijfedlgcdilocofh/';\n" +
