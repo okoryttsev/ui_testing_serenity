@@ -1,7 +1,10 @@
 package definitons;
 
 import net.serenitybdd.jbehave.SerenityStory;
+import net.thucydides.core.annotations.BlurScreenshots;
+import net.thucydides.core.screenshots.BlurLevel;
 import org.apache.commons.lang3.StringUtils;
+import org.jbehave.core.annotations.AfterStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -24,15 +27,15 @@ import java.util.logging.Logger;
 /**
  * @author Sasha on 3/23/2017.
  */
-public class WaveStory extends SerenityStory{
+public class WaveStory extends SerenityStory {
     private static final Logger LOGGER = Logger.getLogger(FirstTest.class.getName());
 
     private static WebDriver driver;
     private FirstPage firstPage;
 
     @Given("opened browser on $path")
-    public void openBrowserOn(String path){
-        String value2fill= StringUtils.isEmpty(path)?"https://www.google.com/":path;
+    public void openBrowserOn(String path) {
+        String value2fill = StringUtils.isEmpty(path) ? "https://www.google.com/" : path;
 
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
@@ -44,22 +47,29 @@ public class WaveStory extends SerenityStory{
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
-        LOGGER.info("open chrome driver on "+value2fill);
+        LOGGER.info("open chrome driver on " + value2fill);
         firstPage = new FirstPage(driver);
         firstPage.getDriver().get(value2fill);
     }
 
     @When("verify redirect is correct")
-    public void redirectIsCorrect(){
-        Assert.assertTrue("Title should be present",StringUtils.isEmpty(firstPage.getDriver().getTitle()));
+    public void redirectIsCorrect() {
+        Assert.assertTrue("Title should be present", !StringUtils.isEmpty(firstPage.getDriver().getTitle()));
     }
 
     @Then("verify wave errors")
-    public void verifyWaveErrors(){
-        JavascriptExecutor js = (JavascriptExecutor)driver;
+    @BlurScreenshots(BlurLevel.MEDIUM)
+    public void verifyWaveErrors() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript(ConstantsWave.WAVE_RUN);
         LOGGER.info("Run js script for Wave plugin activation");
         List<WebElement> errors = driver.findElements(By.cssSelector("img[alt*='ERRORS']"));
-        Assert.assertEquals(0,errors.size());
+        Assert.assertEquals(0, errors.size());
+    }
+
+    @AfterStory
+    public void end() {
+        driver.close();
+        driver.quit();
     }
 }
