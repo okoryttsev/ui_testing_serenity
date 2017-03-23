@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 public class WaveStory extends SerenityStory {
     private static final Logger LOGGER = Logger.getLogger(FirstTest.class.getName());
 
-    private static WebDriver driver;
+    private WebDriver driver;
     private FirstPage firstPage;
 
     @Given("opened browser on $path")
@@ -69,7 +69,6 @@ public class WaveStory extends SerenityStory {
 
     @AfterStory
     public void end() {
-        driver.close();
         driver.quit();
     }
 }

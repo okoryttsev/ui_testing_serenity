@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class FirstTest extends SerenityStory {
     private static final Logger LOGGER = Logger.getLogger(FirstTest.class.getName());
 
-    private static WebDriver driver;
+    private WebDriver driver;
 
 
     @Given("opened google page")
@@ -59,7 +59,6 @@ public class FirstTest extends SerenityStory {
 
     @AfterStory
     public void end() {
-        driver.close();
         driver.quit();
     }
 
