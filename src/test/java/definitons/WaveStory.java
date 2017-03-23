@@ -58,6 +58,7 @@ public class WaveStory extends SerenityStory{
     public void verifyWaveErrors(){
         JavascriptExecutor js = (JavascriptExecutor)driver;
         js.executeScript(ConstantsWave.WAVE_RUN);
+        LOGGER.info("Run js script for Wave plugin activation");
         List<WebElement> errors = driver.findElements(By.cssSelector("img[alt*='ERRORS']"));
         Assert.assertEquals(0,errors.size());
     }
